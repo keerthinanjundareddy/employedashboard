@@ -1,0 +1,466 @@
+/* ChatApp.css */
+body{
+  background-color:  #e8e3e3 !important;
+  /* height:100vh; */
+  width:100%;
+}
+.sidebaropen {
+  width: 20%;
+  background-color: #333;
+  color: white;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  overflow-y: auto;
+  word-wrap: break-word; /* Add this line */
+}
+.sidebarclose{
+
+  width: 20%;
+  background-color: #333;
+  color: white;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  overflow-y: auto;
+  word-wrap: break-word; /* Add this line */
+
+}
+.chat-app {
+    display: flex;
+    height:80vh;
+    padding-top:10vh ;
+    background-color: #e8e3e3;
+    padding-left: 40px;
+    padding-right: 40px;
+    word-wrap: break-word;
+    
+  }
+  
+  
+  
+  .chat {
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .message-list {
+    flex: 1;
+    /* padding: 20px; */
+
+    /* margin-bottom: 20px; */
+    /* overflow-y: auto; */
+    margin-right: 0;
+    margin-left: 0;
+    
+  }
+  
+  .message {
+    /* background-color: #f0f0f0; */
+    border-radius: 8px;
+    /* padding: 10px; */
+    margin: 5px 0;
+  }
+  
+  .timestamp {
+    font-size: 0.8em;
+    color: gray;
+  }
+  
+  .user-input {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    margin-left: 25%;
+
+  }
+  
+  input[type="text"] {
+    flex: 1;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-right: 10px;
+  }
+  
+  button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 15px;
+    cursor: pointer;
+  }
+  .button:active {
+    background-color: red !important;/* Your desired background color */;
+  }
+  
+  /* button:hover {
+    background-color: #0056b3;
+  } */
+  .message-list {
+    flex: 1;
+    padding: 20px;
+    /* overflow-y: auto; */
+    display: flex;
+    flex-direction: column;
+     margin-left:20% ; 
+  }
+  
+  .message {
+    /* background-color: #f0f0f0; */
+    border-radius: 8px;
+    /* padding: 10px; */
+    margin: 5px 0;
+    width: 100%; /* Makes each message div 100% width */
+    word-wrap: break-word; /* Allows text to wrap within the div */
+  }
+  
+  .timestamp {
+    font-size: 0.8em;
+    color: gray;
+  }
+  /* Using CSS Grid: */
+  
+  css
+  Copy code
+  /* ChatApp.css */
+  
+
+  
+
+  .message-list::-webkit-scrollbar {
+    display: none; /* Hide the scrollbar in Webkit browsers (Chrome, Safari, etc.) */
+  }
+  
+  /* For Firefox */
+  .message-list {
+    scrollbar-width: none; /* Hide the scrollbar in Firefox */
+  }
+  
+  .timestamp {
+    font-size: 0.8em;
+    color: gray;
+  }
+
+  .navbar {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    width: 100%;
+    /* height: 8vh; */
+    background-color: white;
+    color: black;
+    /* padding: 10px 10px !important; */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 100; /* Ensure the navbar is above other elements */
+    /* text-align: center; */
+    /* color: pink; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    
+   
+    /* padding-left: 20px; */
+  }
+  .navbar-focused {
+    background-color: #555; /* Change the background color when focused */
+    /* transition: background-color 0.3s ease; Add a smooth transition effect */
+    position: fixed;
+  }
+ 
+  .chat-parent-div{
+    display: flex;
+    flex-direction: row;
+    gap:10px;
+    color: black;
+    padding-left: 10px;
+    /* border:1px solid blue; */
+  }
+  .clear-chat-parent-div{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    padding-right:10px ;
+    
+    /* border:1px solid blue; */
+  }
+  .new-chat-div{
+    border:1px solid pink;
+    color: pink;
+    border-radius: 10px;
+    /* padding: 10px; */
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  
+  }
+  .user-parent-div{
+    display: flex;
+    flex-direction: row;
+    gap:40px;
+    /* border:1px solid blue; */
+  }
+  .user-parent-output-div{
+    display: flex;
+    flex-direction: row;
+    gap:40px;
+    /* border:1px solid blue; */
+  }
+  .user-timestamp-parent-div{
+    display:flex;
+    flex-direction:column;
+    gap:5px;
+  }
+  .user-timestamp-parent-div-two{
+    display:flex;
+    flex-direction:column;
+    gap:5px;
+
+  }
+  .user-name-div{
+    font-size: 1.0em;
+    color: black;
+  }
+  .user-time-div{
+    font-size: 0.6em;
+    color: gray;
+  }
+  .chatbot-name-div{
+    font-size: 0.8em;
+    color:rgb(240, 58, 88);
+  }
+  .chatbot-time-div{
+    font-size: 0.6em;
+    color: gray;
+  }
+  .user-question-div{
+    font-size: 1.2em;
+    color: black;
+  }
+  .chatbot-output-div{
+    font-size: 1.2em;
+    color: black;
+  }
+  .chat-name-div{
+    border:1px solid pink;
+    background-color: pink;
+    border-radius: 8px;
+   padding-left: 8px;
+    padding-right: 8px;
+    color:rgb(240, 58, 88);
+    text-align: center;
+  }
+  /* Add this to your existing CSS for sidebar styling */
+.sidebar-content {
+padding-top: 80px;
+padding-left: 10px;
+padding-right: 10px;
+background-color: #333;
+color: white;
+display: flex;
+flex-direction: column;
+gap: 10px;
+scrollbar-width: thin; /* "thin" is a smaller scrollbar width */
+scrollbar-color:  #333; 
+}
+
+.sidebar-content::-webkit-scrollbar-track {
+background: transparent; /* Make the track transparent */
+}
+
+/* Style the custom scrollbar thumb (optional) */
+.sidebar-content::-webkit-scrollbar-thumb {
+background: transparent; /* Make the thumb transparent */
+}
+
+/* Style the custom scrollbar thumb on hover (optional) */
+.sidebar-content::-webkit-scrollbar-thumb:hover {
+background: transparent; /* Add a hover effect (change the color) */
+}
+.sidebaropen::-webkit-scrollbar {
+display: none !important; /* Hide the scrollbar in Webkit browsers (Chrome, Safari, etc.) */
+}
+.question {
+padding: 10px;
+border-radius: 8px;
+cursor: pointer;
+}
+
+.question:hover {
+background-color: #555; /* Change color on hover */
+}
+
+/* Add this to your existing CSS */
+.toggle-sidebar-button {
+display: none;
+position: fixed;
+top: 10px;
+left: 10px;
+width: 30px;
+height: 30px;
+cursor: pointer;
+z-index: 101; /* Ensure it's above the sidebar */
+}
+
+.toggle-sidebar-button.open {
+transform: rotate(180deg); /* Rotate the button when the sidebar is open */
+}
+.sidebar-content ul li{
+list-style-type: square;
+
+}
+
+
+
+ 
+
+  @media (max-width: 600px) {
+    .sidebaropen {
+      display: none;
+       /* Hide the sidebar completely on mobile screens */
+    }
+
+    .sidebaropen {
+      width: 10%;
+      background-color: #333;
+      color: white;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      overflow-y: auto;
+      word-wrap: break-word; /* Add this line */
+  }
+    .sidebarclose{
+  
+
+      margin-top: 0px;
+      width: 80%;
+      background-color: #333;
+      color: white;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      overflow-y: auto;
+      word-wrap: break-word; 
+      z-index: 100;/* Add this line */
+  
+    }
+    .sidebaropen::-webkit-scrollbar {
+      display: none !important; /* Hide the scrollbar in Webkit browsers (Chrome, Safari, etc.) */
+    }
+
+    .sidebarclose::-webkit-scrollbar {
+      display: none !important; /* Hide the scrollbar in Webkit browsers (Chrome, Safari, etc.) */
+    }
+
+
+    .hamburger-icon{
+      display: block;
+    }
+
+    .user-input {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      margin-left: 0%;
+
+    }
+
+    .message-list {
+      /* flex: 1; */
+      /* padding: 20px; */
+     
+      display: flex;
+      flex-direction: column;
+      margin-left:0% ; /* Ensures messages stack vertically */
+    }
+    .hamburgerdisappearingicon{
+      display:block;
+    }
+    .sidebar-content {
+      padding-top: 0px;
+      padding-left: 10px;
+      padding-right: 10px;
+      background-color: #333;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      scrollbar-width: thin; /* "thin" is a smaller scrollbar width */
+      scrollbar-color:  #333; 
+    }
+    .chat-app {
+      display: flex;
+      height:80vh;
+      padding-top:10vh ;
+      background-color: #e8e3e3;
+      padding-left: 20px;
+      padding-right: 20px;
+      word-wrap: break-word;
+      
+    }
+    .button:active{
+      background-color: red !important;
+    }
+    .message {
+      /* background-color: #f0f0f0; */
+      border-radius: 8px;
+      padding: 0px;
+      /* padding-right: 10px; */
+      /* padding-left: 10px; */
+      /* padding-top: 10px; */
+      /* padding-bottom: 10px; */
+      margin: 5px 0;
+      width: 100%; /* Makes each message div 100% width */
+      word-wrap: break-word; /* Allows text to wrap within the div */
+    }
+    
+    
+
+  }
+
+  @media (min-width: 768px) {
+    .sidebaropen {
+      left: 0; /* Display the sidebar on the left side of the screen */
+      display: block;
+     
+     /* Ensure the sidebar is visible on desktop screens */
+    }
+  .hamburger-icon{
+    display: none;
+  }
+  .hamburgerdisappearingicon{
+    display:none;
+  }
+  .sidebaropen::-webkit-scrollbar {
+    display: none !important; /* Hide the scrollbar in Webkit browsers (Chrome, Safari, etc.) */
+  }
+
+  .sidebarclose::-webkit-scrollbar {
+    display: none !important; /* Hide the scrollbar in Webkit browsers (Chrome, Safari, etc.) */
+  }
+
+  .hamburger-icon{
+        cursor:pointer;
+  }
+  .new-chat-div{
+    cursor: pointer;
+  }
+  }
+  
+  
+  
+  
+  
