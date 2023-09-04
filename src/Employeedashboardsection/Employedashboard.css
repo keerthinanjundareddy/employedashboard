@@ -1,12 +1,12 @@
 /* ChatApp.css */
 body{
-  background-color:  #e8e3e3 !important;
+  background-color:  #ffffff !important;
   /* height:100vh; */
-  width:100%;
+  /* width:100%; */
 }
 .sidebaropen {
   width: 20%;
-  background-color: #333;
+  background-color: #212121;
   color: white;
   position: fixed;
   top: 0;
@@ -18,7 +18,7 @@ body{
 .sidebarclose{
 
   width: 20%;
-  background-color: #333;
+  background-color:#212121;
   color: white;
   position: fixed;
   top: 0;
@@ -32,9 +32,9 @@ body{
     display: flex;
     height:80vh;
     padding-top:10vh ;
-    background-color: #e8e3e3;
-    padding-left: 40px;
-    padding-right: 40px;
+    background-color: #ffffff;
+    /* padding-left: 40px; */
+    /* padding-right: 40px; */
     word-wrap: break-word;
     
   }
@@ -50,11 +50,11 @@ body{
   .message-list {
     flex: 1;
     /* padding: 20px; */
+ 
+    margin-top: 30px;
 
     /* margin-bottom: 20px; */
     /* overflow-y: auto; */
-    margin-right: 0;
-    margin-left: 0;
     
   }
   
@@ -62,7 +62,12 @@ body{
     /* background-color: #f0f0f0; */
     border-radius: 8px;
     /* padding: 10px; */
-    margin: 5px 0;
+    /* margin: 5px 0; */
+    /* border:1px solid white; */
+    /* background-color: #ffffff; */
+  
+
+   
   }
   
   .timestamp {
@@ -72,9 +77,19 @@ body{
   
   .user-input {
     display: flex;
+    gap:20px;
     align-items: center;
+
     padding: 10px;
-    margin-left: 25%;
+    margin-left: 21%;
+    padding-left: 5%;
+    padding-right: 8%;
+    /* margin: 10px auto; */
+    /* margin-left: 10px; */
+    /* margin-right: 20px !important; */
+    /* width: 80%;  */
+    /* width: 100%; */
+    /* margin: 10px auto; */
 
   }
   
@@ -83,11 +98,12 @@ body{
     padding: 15px;
     border: 1px solid #ccc;
     border-radius: 8px;
-    margin-right: 10px;
+    /* margin: 10px auto; */
+    /* margin-right: 10px; */
   }
   
   button {
-    background-color: #007bff;
+    background-color:blue;
     color: white;
     border: none;
     border-radius: 8px;
@@ -103,18 +119,24 @@ body{
   } */
   .message-list {
     flex: 1;
-    padding: 20px;
-    /* overflow-y: auto; */
+    /* padding: 20px; */
+    overflow-y: auto;
     display: flex;
     flex-direction: column;
-     margin-left:20% ; 
+    margin-left:20% ; 
+    /* margin-right: 2%;Ensures messages stack vertically */
   }
   
   .message {
     /* background-color: #f0f0f0; */
+    /* justify-content: center; */
+    /* align-items: center; */
+    /* text-align: center; */
     border-radius: 8px;
     /* padding: 10px; */
-    margin: 5px 0;
+    /* margin: 10px 0px; */
+    /* margin-left: 10px; */
+    /* margin-right: 20px !important; */
     width: 100%; /* Makes each message div 100% width */
     word-wrap: break-word; /* Allows text to wrap within the div */
   }
@@ -129,9 +151,16 @@ body{
   Copy code
   /* ChatApp.css */
   
-
+  .message-list {
+    flex: 1;
+    /* padding: 20px; */
+    overflow-y: scroll; /* Use "scroll" instead of "auto" to hide the scrollbar */
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+  }
   
-
+  
   .message-list::-webkit-scrollbar {
     display: none; /* Hide the scrollbar in Webkit browsers (Chrome, Safari, etc.) */
   }
@@ -192,8 +221,8 @@ body{
     /* border:1px solid blue; */
   }
   .new-chat-div{
-    border:1px solid pink;
-    color: pink;
+    border:1px solid blue;
+    color: blue;
     border-radius: 10px;
     /* padding: 10px; */
     padding-left: 20px;
@@ -208,12 +237,23 @@ body{
     display: flex;
     flex-direction: row;
     gap:40px;
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-top: 10px;
+    padding-bottom: 10px;
     /* border:1px solid blue; */
   }
   .user-parent-output-div{
     display: flex;
     flex-direction: row;
     gap:40px;
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-top: 1px solid rgb(210, 210, 211);
+    border-bottom: 1px solid rgb(210, 210, 211);
+    background-color: rgb(210, 210, 211);
     /* border:1px solid blue; */
   }
   .user-timestamp-parent-div{
@@ -252,7 +292,7 @@ body{
     color: black;
   }
   .chat-name-div{
-    border:1px solid pink;
+    /* border:1px solid pink; */
     background-color: pink;
     border-radius: 8px;
    padding-left: 8px;
@@ -265,7 +305,7 @@ body{
 padding-top: 80px;
 padding-left: 10px;
 padding-right: 10px;
-background-color: #333;
+background-color:#212121;
 color: white;
 display: flex;
 flex-direction: column;
@@ -322,7 +362,16 @@ list-style-type: square;
 
 
 
- 
+  @media (max-width: 400px) {
+    .message {
+      max-width: 100%; /* Set a maximum width for messages on smaller screens */
+    }
+    .navbar {
+      width: 100%;
+    }
+
+  }
+
 
   @media (max-width: 600px) {
     .sidebaropen {
@@ -332,7 +381,7 @@ list-style-type: square;
 
     .sidebaropen {
       width: 10%;
-      background-color: #333;
+      background-color: #212121;
       color: white;
       position: fixed;
       top: 0;
@@ -346,7 +395,7 @@ list-style-type: square;
 
       margin-top: 0px;
       width: 80%;
-      background-color: #333;
+      background-color: #212121;
       color: white;
       position: fixed;
       top: 0;
@@ -374,17 +423,23 @@ list-style-type: square;
       display: flex;
       align-items: center;
       padding: 10px;
+
       margin-left: 0%;
+      
+      /* margin-left: 0%; */
+   
+
 
     }
 
     .message-list {
-      /* flex: 1; */
+      flex: 1;
       /* padding: 20px; */
-     
+      overflow-y: auto;
       display: flex;
       flex-direction: column;
-      margin-left:0% ; /* Ensures messages stack vertically */
+      margin-left:0% !important ;
+      /* margin-right: 2%; Ensures messages stack vertically */
     }
     .hamburgerdisappearingicon{
       display:block;
@@ -393,7 +448,7 @@ list-style-type: square;
       padding-top: 0px;
       padding-left: 10px;
       padding-right: 10px;
-      background-color: #333;
+      background-color:#212121;
       color: white;
       display: flex;
       flex-direction: column;
@@ -405,28 +460,15 @@ list-style-type: square;
       display: flex;
       height:80vh;
       padding-top:10vh ;
-      background-color: #e8e3e3;
-      padding-left: 20px;
-      padding-right: 20px;
+      background-color: #ffffff;
+      /* padding-left: 20px; */
+      /* padding-right: 20px; */
       word-wrap: break-word;
       
     }
     .button:active{
       background-color: red !important;
     }
-    .message {
-      /* background-color: #f0f0f0; */
-      border-radius: 8px;
-      padding: 0px;
-      /* padding-right: 10px; */
-      /* padding-left: 10px; */
-      /* padding-top: 10px; */
-      /* padding-bottom: 10px; */
-      margin: 5px 0;
-      width: 100%; /* Makes each message div 100% width */
-      word-wrap: break-word; /* Allows text to wrap within the div */
-    }
-    
     
 
   }

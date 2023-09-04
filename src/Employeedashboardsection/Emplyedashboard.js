@@ -89,7 +89,7 @@ function Chatbotapistwo() {
         </div>
       </div>
 
-      <div className={hamburgerdisplay ? 'sidebaropen' : 'sidebarclose'}>
+      <div className={hamburgerdisplay ? '  sidebaropen' : 'sidebarclose'}>
         <div className='sidebar-content'>
           <div style={{display:"flex",flexDirection:"row",justifyContent:"space-between"}}>
           <h2 >Questions</h2>
@@ -108,11 +108,11 @@ function Chatbotapistwo() {
         </div>
       </div>
 
-      <div className="chat-app" style={{border:"1px solid yellow"}}>
-        <div className="chat" style={{border:"1px solid green"}}>
-          <div className="message-list" ref={messageListRef} style={{border:"1px solid red"}} >
+      <div className="chat-app" >
+        <div className="chat"  >
+          <div className="message-list" ref={messageListRef}  >
             {messages.map((message, index) => (
-              <div key={index} className="message"  style={{border:"1px solid white",backgroundColor:"white"}}>
+              <div key={index} className="message" >
                 <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
                   <div className='user-parent-div'>
                     <div className='user-timestamp-parent-div'>
@@ -139,12 +139,7 @@ function Chatbotapistwo() {
               value={userInput}
               onChange={handleInputChange}
               onKeyDown={handleInputKeyPress}
-              style={{
-                width: "100%",
-                // Prevent text from wrapping
-                 overflow: "hidden",
-                 wordWrap:"now-wrap"
-              }}
+              
             />
            
             <button onClick={sendMessage}>Send</button>
