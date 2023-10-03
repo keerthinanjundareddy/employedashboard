@@ -3,9 +3,10 @@ import '../Employeedashboardsection/Employeenew.css';
 import persontwo from '../Assets/person.png';
 import hamburger from '../Assets/hamburger-menu-icon-png-white-18 (1).jpg';
 import close from '../Assets/icons8-close-window-50.png';
+import sales from '../Assets/Salesagenticon.png';
 import axios from 'axios';
 
-function Emplyedashboard() {
+function EmployeeDashboard() {
   const [messages, setMessages] = useState([]);
   const [userInput, setUserInput] = useState('');
   const [chats, setChats] = useState([]);
@@ -13,50 +14,62 @@ function Emplyedashboard() {
   const [inputFocused, setInputFocused] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
-  const [hamburgerdisplay, setHamburgerDisplay] = useState(true);
+  const [hamburgerDisplay, setHamburgerDisplay] = useState(true);
   const [selectedChatTitle, setSelectedChatTitle] = useState('');
   const [messageHistory, setMessageHistory] = useState({});
   const [currentQuestion, setCurrentQuestion] = useState('');
   const [questionOrder, setQuestionOrder] = useState([]);
   const [apiResponse, setApiResponse] = useState({});
-  const [conversationHistory, setConversationHistory] = useState(["hiii"]);
+  const [conversationHistory, setConversationHistory] = useState([]);
+  const [selectedChatHistory, setSelectedChatHistory] = useState([]);
+  const [userEnteredQuestions, setUserEnteredQuestions] = useState([]);
+
+
 
   const handleInputChange = (e) => {
     e.preventDefault();
     setUserInput(e.target.value);
   };
-
+ 
   const clearChat = () => {
     if (messages.length > 0) {
+      // Save the current chat in chats history
       const chatTitle = `Chat ${chats.length + 1}`;
       const chatData = { title: chatTitle, answers: messages };
       setChats([...chats, chatData]);
-
-      if (currentQuestion) {
-        setMessageHistory((prevHistory) => ({
-          ...prevHistory,
-          [currentQuestion]: messages,
-        }));
-      }
-
+  
+      // Clear the current chat state
       setCurrentQuestion('');
       setUserInput('');
       setMessages([]);
+      setSelectedChatTitle(''); // Reset selected chat title
+      setMessageHistory((prevHistory) => {
+        const updatedHistory = { ...prevHistory };
+        delete updatedHistory[currentQuestion]; // Remove current chat history
+        return updatedHistory;
+      });
+  
+      // Set up the initial message from Pannaga for the new chat
+      const initializePannagaMessage = "Hi, this is Pannaga from KIA Motors. How can I assist you?";
+      setConversationHistory([`Pannaga: ${initializePannagaMessage}`]);
     }
   };
-
+  
   const sendMessage = () => {
     if (userInput.trim() === '') return;
 
     const newMessage = {
       text: userInput,
       timestamp: new Date().toLocaleTimeString(),
-      sender: "user",
+      sender: 'user',
     };
 
     setMessages([...messages, newMessage]);
 
-    setConversationHistory((prevHistory) => [...prevHistory, `${newMessage.sender}: ${newMessage.text} <END_OF_TURN>`]);
+    setConversationHistory((prevHistory) => [
+      ...prevHistory,
+      `User: ${userInput}`,
+    ]);
 
     if (currentQuestion) {
       setMessageHistory((prevHistory) => ({
@@ -73,37 +86,62 @@ function Emplyedashboard() {
     }
 
     setUserInput('');
-
-    const querys = userInput;
+    setUserEnteredQuestions((prevQuestions) => [...prevQuestions, userInput]);
+console.log("before api call",conversationHistory)
+    const query = userInput;
 
     const requestBody = {
-      human_say: querys,
+      human_say: query,
       conversation_history: conversationHistory,
     };
 
     const headerObject = {
       'Content-Type': 'application/json',
-      "Accept": "*/*",
+      Accept: '/',
     };
 
-    const dashboardsApi = "http://sales-agent.apprikart.com/api/sales_agent/chat";
+    const dashboardsApi = 'http://sales-agent.apprikart.com/api/sales_agent/chat';
 
-    axios.post(dashboardsApi, requestBody, { headers: headerObject })
+    axios
+      .post(dashboardsApi, requestBody, { headers: headerObject })
       .then((response) => {
-        console.log("API Response:", response);
-        // const responseData = JSON.parse(response.data.say);
+        console.log('API Response:', response);
+
         const chatbotResponse = response.data.say;
-        console.log("chatbotresponse",chatbotResponse)
+        const modifiedResponse = chatbotResponse
+          .replace(/\bHello!,This is Pannaga from KIA Motors\b/g, '')
+          .replace('<END_OF_TURN>', '')
+          .trim();
+        console.log('chatbotresponse', modifiedResponse);
 
         setApiResponse((prevResponse) => ({
           ...prevResponse,
-          [userInput]: chatbotResponse,
+          [userInput]: modifiedResponse,
         }));
+
+        setConversationHistory((prevHistory) => [
+          ...prevHistory,
+          `Pannaga: ${modifiedResponse}`,
+        ]);
+        console.log("conversaation after api call",conversationHistory)
       })
       .catch((err) => {
-        console.error("API Error:", err);
-       
+        console.error('API Error:', err);
+    
+        // Define the error message based on the error type
+        let errorMessage = 'Internal Server Error';
+    
+        if (!err.response) {
+          errorMessage = 'Internal Server Error: No response from the server';
+        }
+    
+        // Display the error message in the UI
+        const errorResponse = `Pannaga: ${errorMessage}`;
         
+        setConversationHistory((prevHistory) => [
+          ...prevHistory,
+          errorResponse,
+        ]);
       });
   };
 
@@ -115,30 +153,50 @@ function Emplyedashboard() {
     setMobileSidebarOpen(!mobileSidebarOpen);
   };
 
-  function hamburgerclose() {
-    setHamburgerDisplay(!hamburgerdisplay);
+  function hamburgerClose() {
+    setHamburgerDisplay(!hamburgerDisplay);
   }
 
-  function hamburgerdisappearing() {
-    setHamburgerDisplay(!hamburgerdisplay);
+  function hamburgerDisappearing() {
+    setHamburgerDisplay(!hamburgerDisplay);
   }
 
   const selectChat = (title) => {
-    setSelectedChatTitle(title);
-
     if (title === 'New Chat') {
       setCurrentQuestion('');
       setMessages([]);
+      setConversationHistory([]);
     } else {
-      setCurrentQuestion(title);
-
-      if (messageHistory[title]) {
-        setMessages(messageHistory[title]);
+      setSelectedChatTitle(title);
+  
+      // Retrieve the chat history for the selected title from the chats state
+      const selectedChat = chats.find((chat) => chat.title === title);
+  
+      if (selectedChat) {
+        setMessages(selectedChat.answers);
+  
+        // Construct conversation history based on messages
+        const conversation = selectedChat.answers.map((message) => {
+          if (message.sender === 'user') {
+            return `User: ${message.text}`;
+          } else {
+            return `Pannaga: ${message.text}`;
+          }
+        });
+  
+        setConversationHistory(conversation);
       } else {
-        setMessages([]);
+        // Handle the case where the selected chat is not found
+        console.log(`Chat with title "${title}" not found.`);
       }
     }
   };
+  
+  
+  
+  
+  
+  
 
   const displayChat = (title) => {
     setCurrentQuestion(title);
@@ -151,21 +209,55 @@ function Emplyedashboard() {
 
   useEffect(() => {
     if (messageListRef.current) {
+      // Scroll to the bottom whenever the conversation history changes
       messageListRef.current.scrollTop = messageListRef.current.scrollHeight;
     }
-  }, [messages]);
+  }, [conversationHistory]);
+
+  // ... (rest of your component)
+
+useEffect(()=>{
+    // Initial message from Pannaga
+    const initializePannagaMessage = "Hi, this is Pannaga from KIA Motors. How can I assist you?";
+    setConversationHistory([
+      `Pannaga: ${initializePannagaMessage}`,
+    ]);
+  }, []);
+  const initializePannagaMessage = () => {
+    const initialMessage = "Hi, this is Pannaga from KIA Motors. How can I assist you?";
+    setConversationHistory([`Pannaga: ${initialMessage}`]);
+  };
+  
 
   const handleInputKeyPress = (e) => {
     if (e.key === 'Enter') {
       sendMessage();
     }
   };
-
+  const startNewChat = () => {
+    setSelectedChatTitle('New Chat'); // Reset selected chat title to 'New Chat'
+    setCurrentQuestion('');
+    setMessages([]);
+    setConversationHistory([]); // Clear the conversation history
+    setSelectedChatHistory([]);
+    setQuestionOrder([]); // Clear the question order
+    initializePannagaMessage(); 
+    setUserEnteredQuestions([])// Initialize the Pannaga message
+  };
+  
   return (
     <>
       <div className={`navbar ${inputFocused ? 'navbar-focused' : ''}`}>
         <div className='chat-parent-div'>
-          <div className='hamburger-button' onClick={hamburgerclose}>
+          <div style={{ display: 'flex', flexDirection: 'row', gap: '10px', alignItems: 'center' }} className='inner-chat-paarent-div'>
+            <div>
+              <img src={sales} alt="funding-icon" style={{ width: '40px', height: '40px' }} />
+            </div>
+            <div style={{ color: '#21261B', fontWeight: '600', letterSpacing: '0.5px' }}>
+              SALESAGENT.AI
+            </div>
+          </div>
+          <div className='hamburger-button' onClick={hamburgerClose}>
             <img
               src={hamburger}
               alt="hamburger-icon"
@@ -176,7 +268,7 @@ function Emplyedashboard() {
         </div>
 
         <div className='clear-chat-parent-div'>
-          <div className='new-chat-div' onClick={clearChat}>
+          <div className='new-chat-div' onClick={startNewChat}>
             + New Chat
           </div>
           <div
@@ -198,71 +290,87 @@ function Emplyedashboard() {
         </div>
       </div>
 
-      <div className={hamburgerdisplay ? 'sidebaropen' : 'sidebarclose'}>
+      <div className={hamburgerDisplay ? 'sidebaropen' : 'sidebarclose'}>
         <div className='sidebar-content'>
-          <ul className='question-section'>
-            <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
-              <div>
-                <li
-                  key='New Chat'
-                  className={`chat-title ${
-                    selectedChatTitle === 'New Chat' ? 'selected' : ''
-                  }`}
-                  onClick={() => selectChat('New Chat')}
-                >
-                  Question history
-                </li>
-              </div>
 
-              <div onClick={hamburgerdisappearing} className='hamburgerdisappearingicon'>
-                <img src={close} alt="close-icon" style={{ width: "40px", height: "40px" }} />
-              </div>
-
+          <div style={{ display: "flex", flexDirection: "row", alignItems: "center" }} className='nav-topsec'>
+            <div
+              key='New Chat'
+              className={`chat-title ${
+                selectedChatTitle === 'New Chat' ? 'selected' : ''
+              }`}
+              onClick={() => selectChat('New Chat')}
+              style={{ textAlign: "center" }}
+            >
+              Question history
             </div>
-            {questionOrder.map((question, index) => (
-              <li
-                key={index}
-                style={{ border: "1px solid grey", backgroundColor: "grey", padding: "10px", margin: "5px", cursor: "pointer" }}
-                className={`chat-title ${
-                  question === selectedChatTitle ? 'selected' : ''
-                }`}
-                onClick={() => selectChat(question)}
-              >
-                {question}
-              </li>
-            ))}
-          </ul>
 
+            <div onClick={hamburgerDisappearing} className='hamburgerdisappearingicon' >
+              <img src={close} alt="close-icon" style={{ width: "40px", height: "40px" }} />
+            </div>
+
+          </div>
+          <div style={{ display: "flex", flexDirection: "row", }}>
+            <div className='question-section' style={{ flexBasis: "100%" }}  >
+            {userEnteredQuestions.map((question, index) => (
+                <li
+                  key={index}
+                  className={`chat-title ${
+                    question === selectedChatTitle ? 'selected' : ''
+                  }`}
+                  onClick={() => {
+                    selectChat(question);
+                    hamburgerDisappearing();
+                  }}
+                  style={{ padding: "5px", borderRadius: "5px", backgroundColor: "#191C14", marginTop: "10px", marginLeft: "10px", marginRight: "10px" }}
+                >
+                  {question}
+                </li>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
 
       <div className='chat-app' >
         <div className='chat' >
+
           <div
             className='message-list'
             ref={messageListRef}
           >
-            {messages.map((message, index) => (
+            {conversationHistory.map((message, index) => (
               <div
                 key={index}
                 className='message'
               >
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                <div
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '0px',
+                    backgroundColor: message.startsWith('User') ? '#FAFAFA' : '#EBEBEB ', // Set background color based on sender
+                  }}
+                >
                   <div className='user-parent-div'>
                     <div className='user-timestamp-parent-div'>
-                      <div className='user-name-div'>user</div>
-                      <div className='user-time-div'>{message.timestamp}</div>
+                    <div
+          className={`user-name-div ${
+            message.startsWith('User') ? 'user-name' : 'pannaga-name'
+          }`}
+        >
+                        {message.startsWith('User') ? 'USER' : 'PANNAGA'}
+                      </div>
+                      <div className='user-time-div'>
+                        {new Date().toLocaleTimeString()}
+                      </div>
                     </div>
-                    <div className='user-question-div'>{message.text}</div>
-                  </div>
-                  <div className='user-parent-output-div'>
-                    <div className='user-timestamp-parent-div-two'>
-                      <div className='chatbot-name-div'>Pannaga</div>
-                      <div className='chatbot-time-div'>{message.timestamp}</div>
-                    </div>
-                    <div className='chatbot-output-div'>
-                      {apiResponse[message.text] ? apiResponse[message.text] : ''}
-                    </div>
+                    <div
+        className={`user-question-div ${
+          message.startsWith('User') ? 'use-question' : 'pannaga-question'
+        }`}
+      >{message.split(': ')[1]}</div>
+
                   </div>
                 </div>
               </div>
@@ -275,6 +383,7 @@ function Emplyedashboard() {
               value={userInput}
               onChange={handleInputChange}
               onKeyDown={handleInputKeyPress}
+              style={{ fontFamily: "Sora, sans-serif" }}
             />
             <button onClick={sendMessage}>Send</button>
           </div>
@@ -284,4 +393,4 @@ function Emplyedashboard() {
   );
 }
 
-export default Emplyedashboard;
+export default EmployeeDashboard;

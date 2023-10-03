@@ -1,12 +1,24 @@
 /* ChatApp.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Sora&display=swap');
 body{
     background-color:  #ffffff !important;
+    font-family: 'Sora', sans-serif;
     /* height:100vh; */
     /* width:100%; */
   }
+  ::placeholder {
+  color: #000000 !important;
+  font-family:'Sora', sans-serif ;
+  font-weight: 400;
+}
+.chat-title {
+  cursor: pointer;
+  /* padding-left: 50px; */
+}
+
   .sidebaropen {
-    width: 20%;
-    background-color: #212121;
+    width: 19%;
+    background-color: #02080A;
     color: white;
     position: fixed;
     top: 0;
@@ -14,11 +26,11 @@ body{
     left: 0;
     overflow-y: auto;
     word-wrap: break-word; /* Add this line */
-  }
+}
   .sidebarclose{
-  
-    width: 20%;
-    background-color:#212121;
+
+    width: 19%;
+    background-color:#02080A;
     color: white;
     position: fixed;
     top: 0;
@@ -26,12 +38,12 @@ body{
     left: 0;
     overflow-y: auto;
     word-wrap: break-word; /* Add this line */
-  
+
   }
   .chat-app {
       display: flex;
       height:80vh;
-      padding-top:10vh ;
+      padding-top:7vh ;
       background-color: #ffffff;
       /* padding-left: 40px; */
       /* padding-right: 40px; */
@@ -52,7 +64,7 @@ body{
       /* padding: 20px; */
    
       margin-top: 30px;
-  
+
       /* margin-bottom: 20px; */
       /* overflow-y: auto; */
       
@@ -66,7 +78,7 @@ body{
       /* border:1px solid white; */
       /* background-color: #ffffff; */
     
-  
+
      
     }
     
@@ -90,20 +102,23 @@ body{
       /* width: 80%;  */
       /* width: 100%; */
       /* margin: 10px auto; */
-  
+
     }
+   
     
     input[type="text"] {
       flex: 1;
       padding: 15px;
-      border: 1px solid #ccc;
+      border: 1px solid #EBEBEB;
       border-radius: 8px;
+      background-color: #EBEBEB;
+  
       /* margin: 10px auto; */
       /* margin-right: 10px; */
     }
     
     button {
-      background-color:blue;
+      background-color:#3E4733;
       color: white;
       border: none;
       border-radius: 8px;
@@ -123,7 +138,7 @@ body{
       overflow-y: auto;
       display: flex;
       flex-direction: column;
-      margin-left:20% ; 
+      margin-left:18% ; 
       /* margin-right: 2%;Ensures messages stack vertically */
     }
     
@@ -181,10 +196,10 @@ body{
       left: 0;
       width: 100%;
       /* height: 8vh; */
-      background-color: white;
+      background-color:#FAFAFA;
       color: black;
       /* padding: 10px 10px !important; */
-      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+      /* box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2); */
       z-index: 100; /* Ensure the navbar is above other elements */
       /* text-align: center; */
       /* color: pink; */
@@ -194,8 +209,10 @@ body{
       align-items: center;
       padding-top: 10px;
       padding-bottom: 10px;
+      box-shadow: 0 0.15px 0 0 #21261B;
+      /* border-bottom: 0.1px solid #21261B; */
       
-     
+     height:6vh;
       /* padding-left: 20px; */
     }
     .navbar-focused {
@@ -221,8 +238,9 @@ body{
       /* border:1px solid blue; */
     }
     .new-chat-div{
-      border:1px solid blue;
-      color: blue;
+      border:1px solid #D2EBB9;
+      color: #21261B;
+      background-color:#D2EBB9;
       border-radius: 10px;
       /* padding: 10px; */
       padding-left: 20px;
@@ -236,60 +254,109 @@ body{
     .user-parent-div{
       display: flex;
       flex-direction: row;
-      gap:40px;
+      justify-content:left;
+      /* gap:0px; */
       padding-left: 10%;
       padding-right: 10%;
       padding-top: 10px;
       padding-bottom: 10px;
+      /* background-color:#FAFAFA ; */
       /* border:1px solid blue; */
     }
     .user-parent-output-div{
       display: flex;
       flex-direction: row;
-      gap:40px;
+      /* gap:40px; */
       padding-left: 10%;
       padding-right: 10%;
       padding-top: 10px;
       padding-bottom: 10px;
-      border-top: 1px solid rgb(210, 210, 211);
-      border-bottom: 1px solid rgb(210, 210, 211);
-      background-color: rgb(210, 210, 211);
+      border-top: 1px solid rgb(247,247,248);
+      border-bottom: 1px solid rgb(247,247,248);
+      background-color:  #EBEBEB;
       /* border:1px solid blue; */
     }
     .user-timestamp-parent-div{
       display:flex;
       flex-direction:column;
-      gap:5px;
+      /* gap:5px; */
     }
     .user-timestamp-parent-div-two{
       display:flex;
       flex-direction:column;
-      gap:5px;
+      /* gap:5px; */
   
     }
     .user-name-div{
-      font-size: 1.0em;
+      font-size: 10px;
+      font-weight: 400;
       color: black;
+      /* border:1px solid blue; */
+      /* background-color: blue; */
+      border-radius: 5px;
+      text-align: center;
+      padding:8px;
     }
+    .user-name {
+       border:1px solid #F0F0F0;
+      background-color: #F0F0F0;
+      color:#000000;
+      /* Styles for the user's name */
+    }
+    
+    .pannaga-name {
+       border:1px solid  #3E4733;
+      background-color:  #3E4733;
+      color: #FFFFFF;
+      /* Styles for Pannaga's name */
+    }
+    
     .user-time-div{
       font-size: 0.6em;
-      color: gray;
+      color: #818181;
+      white-space: nowrap; /* Prevent text from wrapping */
+      overflow: hidden; /* Hide overflow content if it doesn't fit */
+      text-overflow: ellipsis;
     }
     .chatbot-name-div{
-      font-size: 0.8em;
-      color:rgb(240, 58, 88);
+      font-size: 10px;
+      font-weight: 400;
+      color: black;
+      border:1px solid #3E4733;
+      background-color:#3E4733;
+      border-radius: 5px;
+      text-align: center;
+      padding:8px;
+      color:white;
     }
     .chatbot-time-div{
       font-size: 0.6em;
-      color: gray;
+      color: #818181;
+      white-space: nowrap; /* Prevent text from wrapping */
+      overflow: hidden; /* Hide overflow content if it doesn't fit */
+      text-overflow: ellipsis;
     }
-    .user-question-div{
+    /* .user-question-div{
       font-size: 1.2em;
       color: black;
+      padding-left: 50px;
+    } */
+    .use-question{
+      font-size: 1.2em;
+      color: black;
+      padding-left: 70px;
     }
+    
+    .pannaga-question {
+      font-size: 1.2em;
+      color: black;
+      padding-left: 50px;
+    }
+    
     .chatbot-output-div{
       font-size: 1.2em;
       color: black;
+      padding-left: 30px;
     }
     .chat-name-div{
       /* border:1px solid pink; */
@@ -301,47 +368,50 @@ body{
       text-align: center;
     }
     /* Add this to your existing CSS for sidebar styling */
-  .sidebar-content {
-  padding-top: 80px;
-  padding-left: 10px;
-  padding-right: 10px;
-  background-color:#212121;
+.sidebar-content {
+  padding-top: 100px;
+  /* padding-left: 10px; */
+  /* padding-right: 10px; */
+  background-color:#02080A;
   color: white;
   display: flex;
   flex-direction: column;
   gap: 10px;
   scrollbar-width: thin; /* "thin" is a smaller scrollbar width */
   scrollbar-color:  #333; 
-  }
-  
-  .sidebar-content::-webkit-scrollbar-track {
+  /* justify-content: center; */
+  /* align-items: center; */
+  /* border:1px solid red; */
+}
+
+.sidebar-content::-webkit-scrollbar-track {
   background: transparent; /* Make the track transparent */
-  }
-  
-  /* Style the custom scrollbar thumb (optional) */
-  .sidebar-content::-webkit-scrollbar-thumb {
+}
+
+/* Style the custom scrollbar thumb (optional) */
+.sidebar-content::-webkit-scrollbar-thumb {
   background: transparent; /* Make the thumb transparent */
-  }
-  
-  /* Style the custom scrollbar thumb on hover (optional) */
-  .sidebar-content::-webkit-scrollbar-thumb:hover {
+}
+
+/* Style the custom scrollbar thumb on hover (optional) */
+.sidebar-content::-webkit-scrollbar-thumb:hover {
   background: transparent; /* Add a hover effect (change the color) */
-  }
-  .sidebaropen::-webkit-scrollbar {
+}
+.sidebaropen::-webkit-scrollbar {
   display: none !important; /* Hide the scrollbar in Webkit browsers (Chrome, Safari, etc.) */
-  }
-  .question {
+}
+.question {
   padding: 10px;
   border-radius: 8px;
   cursor: pointer;
-  }
-  
-  .question:hover {
+}
+
+.question:hover {
   background-color: #555; /* Change color on hover */
-  }
-  
-  /* Add this to your existing CSS */
-  .toggle-sidebar-button {
+}
+
+/* Add this to your existing CSS */
+.toggle-sidebar-button {
   display: none;
   position: fixed;
   top: 10px;
@@ -350,18 +420,38 @@ body{
   height: 30px;
   cursor: pointer;
   z-index: 101; /* Ensure it's above the sidebar */
-  }
-  
-  .toggle-sidebar-button.open {
+}
+
+.toggle-sidebar-button.open {
   transform: rotate(180deg); /* Rotate the button when the sidebar is open */
-  }
-  .sidebar-content ul li{
-  list-style-type: square;
-  
-  }
-  
-  
-  
+}
+.sidebar-content {
+  list-style-type: none; /* Remove default list style */
+  /* padding-left: 20px; Adjust the left padding to create space for the bullet marker */
+}
+.sidebar-content ul li {
+  list-style-type: none;
+}
+.sidebar-content  li:before {
+  content: "•"; 
+  margin-right: 10px;
+  /* margin-right: 10px; Adjust the spacing between the marker and the list item text */
+}
+.nav-topsec{
+  justify-content: center;
+}
+
+/* .chat-first-inner-parent-div{
+ display:flex;
+ flex-direction:row;
+ gap:10px;
+ display:block;
+} */
+/* .input:focus{
+  border:none !important;
+  outline:none !important
+} */
+
     @media (max-width: 400px) {
       .message {
         max-width: 100%; /* Set a maximum width for messages on smaller screens */
@@ -371,17 +461,24 @@ body{
       }
   
     }
-  
-  
-    @media (max-width: 600px) {
+
+
+    @media (max-width: 767px) {
+      .nav-topsec{
+        justify-content: space-between;
+      }
+      .chat-title {
+        padding-left: 0px;
+      }
+     
       .sidebaropen {
         display: none;
          /* Hide the sidebar completely on mobile screens */
       }
-  
+
       .sidebaropen {
         width: 10%;
-        background-color: #212121;
+        background-color: #02080A;
         color: white;
         position: fixed;
         top: 0;
@@ -392,10 +489,10 @@ body{
     }
       .sidebarclose{
     
-  
+
         margin-top: 0px;
         width: 80%;
-        background-color: #212121;
+        background-color: #02080A;
         color: white;
         position: fixed;
         top: 0;
@@ -409,29 +506,29 @@ body{
       .sidebaropen::-webkit-scrollbar {
         display: none !important; /* Hide the scrollbar in Webkit browsers (Chrome, Safari, etc.) */
       }
-  
+
       .sidebarclose::-webkit-scrollbar {
         display: none !important; /* Hide the scrollbar in Webkit browsers (Chrome, Safari, etc.) */
       }
-  
-  
+
+
       .hamburger-icon{
         display: block;
       }
-  
+
       .user-input {
         display: flex;
         align-items: center;
         padding: 10px;
-  
+
         margin-left: 0%;
         
         /* margin-left: 0%; */
      
-  
+
   
       }
-  
+
       .message-list {
         flex: 1;
         /* padding: 20px; */
@@ -448,7 +545,7 @@ body{
         padding-top: 0px;
         padding-left: 10px;
         padding-right: 10px;
-        background-color:#212121;
+        background-color:#02080A;
         color: white;
         display: flex;
         flex-direction: column;
@@ -459,7 +556,7 @@ body{
       .chat-app {
         display: flex;
         height:80vh;
-        padding-top:10vh ;
+        padding-top:8vh ;
         background-color: #ffffff;
         /* padding-left: 20px; */
         /* padding-right: 20px; */
@@ -469,17 +566,16 @@ body{
       .button:active{
         background-color: red !important;
       }
-      
-  
-    }
-  
-    @media (min-width: 768px) {
-      .sidebaropen {
-        left: 0; /* Display the sidebar on the left side of the screen */
-        display: block;
-       
-       /* Ensure the sidebar is visible on desktop screens */
+      .inner-chat-paarent-div{
+        display: none !important;
       }
+      
+    }
+
+    @media (min-width: 767px) {
+     
+    
+    
     .hamburger-icon{
       display: none;
     }
@@ -489,17 +585,18 @@ body{
     .sidebaropen::-webkit-scrollbar {
       display: none !important; /* Hide the scrollbar in Webkit browsers (Chrome, Safari, etc.) */
     }
-  
+
     .sidebarclose::-webkit-scrollbar {
       display: none !important; /* Hide the scrollbar in Webkit browsers (Chrome, Safari, etc.) */
     }
-  
+
     .hamburger-icon{
           cursor:pointer;
     }
     .new-chat-div{
       cursor: pointer;
     }
+   
     }
     
     
